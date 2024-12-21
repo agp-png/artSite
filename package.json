@@ -1,0 +1,24 @@
+{
+  "name": "artsite",
+  "version": "1.0.0",
+  "description": "\"A simple online store and shopping cart with Stripe payment integration, built using Node.js, Express, and vanilla JavaScript.\"",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "online",
+    "store",
+    "full",
+    "stack",
+    "photo",
+    "reference",
+    "shop"
+  ],
+  "author": "allanPretty",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
+}
