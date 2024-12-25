@@ -3,9 +3,9 @@
 let stripe, elements, cardElement, stripeConfig;
 
  // Initialize Stripe elements and mount the card element
- elements = stripe.elements();
- cardElement = elements.create('card');
- cardElement.mount('#card-element'); // Mount card element to the DOM placeholder
+//  elements = stripe.elements();
+//  cardElement = elements.create('card');
+//  cardElement.mount('#card-element'); // Mount card element to the DOM placeholder
 
 // Async function to fetch Stripe configuration and initialize Stripe
 async function fetchConfig() {
@@ -18,9 +18,9 @@ async function fetchConfig() {
         stripe = Stripe(stripeConfig.publishableKey); // Replace with your endpoint key field
 
         // // Initialize Stripe elements and mount the card element
-        // elements = stripe.elements();
-        // cardElement = elements.create('card');
-        // cardElement.mount('#card-element'); // Mount card element to the DOM placeholder
+        elements = stripe.elements();
+        cardElement = elements.create('card');
+        cardElement.mount('#card-element'); // Mount card element to the DOM placeholder
 
         console.log('Stripe initialized successfully with elements:', { stripe, elements });
         
