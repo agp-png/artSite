@@ -41,6 +41,13 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 // Function to add item to cart
 function addToCart(itemName, amount) {
     console.log(`addToCart called with: itemName=${itemName}, amount=${amount}`);
+    
+    // Check if item already exists in cart
+    if (cart.some(item => item.name === itemName)) {
+        alert('You already have this photo set in your cart. Only one copy per customer is allowed.');
+        return;
+    }
+    
     // Add the item to the cart array
     cart.push({ name: itemName, amount });
     console.log('Update cart:', cart); //log cart contents
