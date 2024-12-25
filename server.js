@@ -1,6 +1,5 @@
 const cors = require('cors');
 const express = require('express');
-
 require('dotenv').config();
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Initialize Stripe once
@@ -9,10 +8,18 @@ app.use(cors());
 
 // Middleware to parse JSON and log requests
 app.use(express.json());
+app.use(express.static(__dirname));
 app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
     next();
 });
+
+// Fallback route for non-static requests (optional)
+app.get('*', (req, res) => {
+    res.sendFile(__dirname + '/index.html'); // Serves index.html for any unmatched routes
+});
+
+
 
 // Helper function to calculate the total amount
 function calculateTotal(items) {
