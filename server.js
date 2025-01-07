@@ -187,7 +187,6 @@ app.put("/profile", async (req, res) => {
 });
 
 // Password recovery
-const bcrypt = require("bcrypt"); // Ensure bcrypt is imported
 
 app.post("/recover-password", async (req, res) => {
     const { email } = req.body;
