@@ -1,145 +1,393 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://js.stripe.com/v3/"></script>
-    <title>Photo Set Store</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://js.stripe.com/v3/"></script>
+        <title>Photo Set Store</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <!--Profile Modal-->
+        <div id="profile-modal" style="display: none">
+            <div class="modal-content">
+                <h2>Create Your Profile</h2>
+                <p>
+                    Hey there! Glad you've found something you like. To ensure
+                    duplicates are not purchased and can be verified and
+                    redownloaded if lost, we encourage creating a profile!
+                </p>
+                <form id="profile-form">
+                    <input
+                        type="text"
+                        id="profile-username"
+                        placeholder="Username"
+                        required
+                    />
+                    <input
+                        type="email"
+                        id="profile-email"
+                        placeholder="Email"
+                        required
+                    />
+                    <input
+                        type="password"
+                        id="profile-password"
+                        placeholder="Password"
+                        required
+                    />
+                    <input
+                        type="text"
+                        id="profile-phone"
+                        placeholder="Phone Number (Optional)"
+                    />
+                    <button type="submit">Create Profile</button>
+                    <button
+                        type="button"
+                        onclick="document.getElementById('profile-modal').style.display='none'"
+                    >
+                        Skip
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Add this somewhere near the top of your page for global feedback -->
+        <div
+            id="feedback"
+            style="
+                display: none;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+            "
+        ></div>
+
         <nav>
             <ul>
+                <li><a href="/profile">My Account</a></li>
                 <li>Abt</li>
                 <li>FAQ</li>
                 <li>Contact</li>
+                <li><a href="#" id="my-profile-link">My Profile</a></li>
             </ul>
         </nav>
-    <div id="middle">    
-    <h1>Available Photo Sets</h1>
-    <div  class="photo-flexbox">
-        <div class="thumbnail set1">
-            <div class="overlay">
-                <div class="flex-item description">Set of 4 transparent PNGs, nude, front side and back profile, right hand raised</div>
-                <button class="add-to-cart" data-name="s1" data-price="700">Add to Cart</button>
+        <div id="middle">
+            <h1>Available Photo Sets</h1>
+            <div class="photo-flexbox">
+                <div class="thumbnail set1">
+                    <div class="overlay">
+                        <div class="flex-item description">
+                            Set of 4 transparent PNGs, nude, front side and back
+                            profile, right hand raised
+                        </div>
+                        <button
+                            class="add-to-cart"
+                            data-name="s1"
+                            data-price="700"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <img
+                        src="images/TN1.jpeg"
+                        alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details"
+                    />
+                </div>
+                <div class="thumbnail set2">
+                    <div class="overlay">
+                        <div class="flex-item description">
+                            Set of 7 transparent PNGs, nude, front side and back
+                            profile and quarter turns, right hand raised as if
+                            to wave or sheild eyes.
+                        </div>
+                        <button
+                            class="add-to-cart"
+                            data-name="s2"
+                            data-price="1200"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <img
+                        src="images/TN2.jpeg"
+                        alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details"
+                    />
+                </div>
+                <div class="thumbnail set3">
+                    <div class="overlay">
+                        <div class="flex-item description">
+                            Set of 9 transparent PNGs, nude, front side and back
+                            profile with front and back quarter turns, right
+                            hand raised, single and dual leg weight
+                            distribution.
+                        </div>
+                        <button
+                            class="add-to-cart"
+                            data-name="s3"
+                            data-price="1200"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <img
+                        src="images/TN3.jpeg"
+                        alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details"
+                    />
+                </div>
+                <div class="thumbnail set4">
+                    <div class="overlay">
+                        <div class="flex-item description">
+                            Set of 7 transparent PNGs, nude, front side and back
+                            profile with front and back quarter turns, right
+                            hand reaching forward as if to hold a doorknob or
+                            grasp a hand.
+                        </div>
+                        <button
+                            class="add-to-cart"
+                            data-name="s4"
+                            data-price="1200"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <img
+                        src="images/TN4.jpeg"
+                        alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details"
+                    />
+                </div>
+                <div class="thumbnail set5">
+                    <div class="overlay">
+                        <div class="flex-item description">
+                            Set of 7 transparent PNGs, nude, front side and back
+                            profile with front and back quarter turns. Both arms
+                            to the side as if ripping off a shirt or symbiote*,
+                            receiving power, losing mind.
+                        </div>
+                        <button
+                            class="add-to-cart"
+                            data-name="s5"
+                            data-price="1200"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <img
+                        src="images/TN5.jpeg"
+                        alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details"
+                    />
+                </div>
+                <div class="thumbnail set6">
+                    <div class="overlay">
+                        <div class="flex-item description">
+                            Set of 4 transparent PNGs, nude, front side and back
+                            profile. Single Leg pose, right hand holding right
+                            foot as if to check shoe for gum or stretch.
+                        </div>
+                        <button
+                            class="add-to-cart"
+                            data-name="s6"
+                            data-price="1000"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <img
+                        src="images/TN6.jpeg"
+                        alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details"
+                    />
+                </div>
+                <div class="thumbnail set7">
+                    <div class="overlay">
+                        <div class="flex-item description">
+                            Set of 16 transparent PNGs, nude, front side and
+                            back profile with front and back quarter turns.
+                            Right hand bent at elbox as if to check the time.
+                            Looking down *and* out variations .
+                        </div>
+                        <button
+                            class="add-to-cart"
+                            data-name="s7"
+                            data-price="1500"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <img
+                        src="images/TN7.jpeg"
+                        alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details"
+                    />
+                </div>
+                <div class="thumbnail set8">
+                    <div class="overlay">
+                        <div class="flex-item description">
+                            Set of 8 transparent PNGs, nude, front side and back
+                            profile with front and back quarter turns. Both arms
+                            bent at elbow as if to be reading a newspaper.
+                        </div>
+                        <button
+                            class="add-to-cart"
+                            data-name="s8"
+                            data-price="1200"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <img
+                        src="images/TN8.jpeg"
+                        alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details"
+                    />
+                </div>
+                <div class="thumbnail set9">
+                    <div class="overlay">
+                        <div class="flex-item description">
+                            Set of 16 transparent PNGs, nude, front side and
+                            back profile with front and back quarter turns. Both
+                            hands above head oscilating at left right and middle
+                            positions as if at a concert or surrendering.
+                        </div>
+                        <button
+                            class="add-to-cart"
+                            data-name="s9"
+                            data-price="1500"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <img
+                        src="images/TN9.jpeg"
+                        alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details"
+                    />
+                </div>
+                <div class="thumbnail set10">
+                    <div class="overlay">
+                        <div class="flex-item description">
+                            Set of 8 transparent PNGs, nude, front side and back
+                            profile with front and back quarter turns. Left hand
+                            on hip with right hand pointing as if pointing out
+                            something on a table picking out donuts or peering
+                            out over a wall or cliff and pointing out something
+                            below.
+                        </div>
+                        <button
+                            class="add-to-cart"
+                            data-name="s10"
+                            data-price="1300"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <img
+                        src="images/TN10.jpeg"
+                        alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details"
+                    />
+                </div>
+                <div class="thumbnail set11">
+                    <div class="overlay">
+                        <div class="flex-item description">
+                            Set of 8 transparent PNGs, nude, front side and back
+                            profile with front and back quarter turns. Staggered
+                            footing with right hand pointing out in dispbelief
+                            or maybe pointing out the perpetrator of a heinous
+                            act.
+                        </div>
+                        <button
+                            class="add-to-cart"
+                            data-name="s11"
+                            data-price="1300"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <img
+                        src="images/TN11.jpeg"
+                        alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details"
+                    />
+                </div>
+                <div class="thumbnail set12">
+                    <div class="overlay">
+                        <div class="flex-item description">
+                            Set of 8 transparent PNGs, nude, front side and back
+                            profile with front and back quarter turns. Staggered
+                            footing with right hand pointing up towards a kaiju
+                            maybe or perhaps an enemy airship or an Eva.
+                        </div>
+                        <button
+                            class="add-to-cart"
+                            data-name="s12"
+                            data-price="1300"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <img
+                        src="images/TN12.jpeg"
+                        alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details"
+                    />
+                </div>
+                <div class="thumbnail set13">
+                    <div class="overlay">
+                        <div class="flex-item description">
+                            Set of 13 transparent PNGs, Covered (compression
+                            shorts), Mix of front and side profile. All
+                            reference photos taken mid-air. Jumping towards the
+                            falling artifact? The finishing flying knee in a
+                            fierce boudt? The cleanest heal click you ever did
+                            see? All that and a bit more!
+                        </div>
+                        <button
+                            class="add-to-cart"
+                            data-name="s13"
+                            data-price="2000"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <img
+                        src="images/TN13.jpeg"
+                        alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details"
+                    />
+                </div>
+                <!-- Add more thumbnails as needed -->
             </div>
-            <img src="images/TN1.jpeg" alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details">
         </div>
-        <div class="thumbnail set2">
-            <div class="overlay">
-            <div class="flex-item description">Set of 7 transparent PNGs, nude, front side and back profile and quarter turns, right hand raised as if to wave or sheild eyes.</div>
-                <button class="add-to-cart" data-name="s2" data-price="1200">Add to Cart</button>
-            </div>    
-            <img src="images/TN2.jpeg" alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details">
-        </div>
-        <div class="thumbnail set3">
-            <div class="overlay">
-                <div class="flex-item description">Set of 9 transparent PNGs, nude, front side and back profile with front and back quarter turns, right hand raised, single and dual leg weight distribution. </div>
-                <button class="add-to-cart" data-name="s3" data-price="1200">Add to Cart</button>
-            </div>
-            <img src="images/TN3.jpeg" alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details">
-        </div>
-        <div class="thumbnail set4">
-            <div class="overlay">
-                <div class="flex-item description">Set of 7 transparent PNGs, nude, front side and back profile with front and back quarter turns, right hand reaching forward as if to hold a doorknob or grasp a hand.</div>
-                <button class="add-to-cart" data-name="s4" data-price="1200">Add to Cart</button>
-            </div>
-            <img src="images/TN4.jpeg" alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details">
-        </div>
-        <div class="thumbnail set5">
-            <div class="overlay">
-            <div class="flex-item description">Set of 7 transparent PNGs, nude, front side and back profile with front and back quarter turns. Both arms to the side as if ripping off a shirt or symbiote*, receiving power, losing mind.</div>
-                <button class="add-to-cart" data-name="s5" data-price="1200">Add to Cart</button>
-            </div>
-            <img src="images/TN5.jpeg" alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details">
-        </div>
-        <div class="thumbnail set6">
-            <div class="overlay">
-            <div class="flex-item description">Set of 4 transparent PNGs, nude, front side and back profile.  Single Leg pose, right hand holding right foot as if to check shoe for gum or stretch.</div>
-            <button class="add-to-cart" data-name="s6" data-price="1000">Add to Cart</button>
-            </div>
-            <img src="images/TN6.jpeg" alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details">
-        </div>
-        <div class="thumbnail set7">
-            <div class="overlay">
-            <div class="flex-item description">Set of 16 transparent PNGs, nude, front side and back profile with front and back quarter turns. Right hand bent at elbox as if to check the time. Looking down *and* out variations .</div>
-                <button class="add-to-cart" data-name="s7" data-price="1500">Add to Cart</button>
-            </div>
-            <img src="images/TN7.jpeg" alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details">
-        </div>
-        <div class="thumbnail set8">
-            <div class="overlay">
-                <div class="flex-item description">Set of 8 transparent PNGs, nude, front side and back profile with front and back quarter turns. Both arms bent at elbow as if to be reading a newspaper.</div>
-                <button class="add-to-cart" data-name="s8" data-price="1200">Add to Cart</button>
-            </div>
-            <img src="images/TN8.jpeg" alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details">
-        </div>
-        <div class="thumbnail set9">
-            <div class="overlay">
-                <div class="flex-item description">Set of 16 transparent PNGs, nude, front side and back profile with front and back quarter turns. Both hands above head oscilating at left right and middle positions as if at a concert or surrendering.</div>
-                <button class="add-to-cart" data-name="s9" data-price="1500">Add to Cart</button>
-            </div>
-            <img src="images/TN9.jpeg" alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details">
-        </div>
-        <div class="thumbnail set10">
-            <div class="overlay"> 
-                <div class="flex-item description">Set of 8 transparent PNGs, nude, front side and back profile with front and back quarter turns. Left hand on hip with right hand pointing as if pointing out something on a table picking out donuts or peering out over a wall or cliff and pointing out something below.</div>
-                <button class="add-to-cart" data-name="s10" data-price="1300">Add to Cart</button>
-            </div>
-            <img src="images/TN10.jpeg" alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details">
-        </div>
-        <div class="thumbnail set11">
-            <div class="overlay">
-                <div class="flex-item description">Set of 8 transparent PNGs, nude, front side and back profile with front and back quarter turns. Staggered footing with right hand pointing out in dispbelief or maybe pointing out the perpetrator of a heinous act.</div>
-                <button class="add-to-cart" data-name="s11" data-price="1300">Add to Cart</button>
-            </div>
-            <img src="images/TN11.jpeg" alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details">
-        </div>
-        <div class="thumbnail set12">
-            <div class="overlay">
-                <div class="flex-item description">Set of 8 transparent PNGs, nude, front side and back profile with front and back quarter turns. Staggered footing with right hand pointing up towards a kaiju maybe or perhaps an enemy airship or an Eva.</div>
-                <button class="add-to-cart" data-name="s12" data-price="1300">Add to Cart</button>
-            </div>
-            <img src="images/TN12.jpeg" alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details">
-        </div>
-        <div class="thumbnail set13">
-            <div class="overlay">
-                <div class="flex-item description">Set of 13 transparent PNGs, Covered (compression shorts), Mix of front and side profile. All reference photos taken mid-air. Jumping towards the falling artifact? The finishing flying knee in a fierce boudt? The cleanest heal click you ever did see? All that and a bit more!</div>
-                <button class="add-to-cart" data-name="s13" data-price="2000">Add to Cart</button>
-            </div>
-            <img src="images/TN13.jpeg" alt="image of a golden bronze skinned male figure with a mozaic filter obscuring most details">
-        </div>
-    <!-- Add more thumbnails as needed -->
-    </div>
-    </div>
         <!-- Cart and Checkout Section -->
         <div id="cart">
             <h2>Shopping Cart</h2>
             <ul id="cart-items"></ul>
-            <p id="cart-total">Total: $0.00</p> <!-- Total element -->
+            <p id="cart-total">Total: $0.00</p>
+            <!-- Total element -->
             <button id="checkout-button">Checkout</button>
         </div>
-        
+
         <!-- Inline Checkout Form -->
         <div id="overlay">
             <div id="checkout-form">
                 <h2>Checkout</h2>
                 <form id="checkout-form-element">
                     <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" autocomplete="name"><br><br>
-                    
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" autocomplete="email"><br><br>
-                    <!--stripe should fill in "card-element" div dynamically-->
-                    <div id="card-element">
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        autocomplete="name"
+                    /><br /><br />
 
-                    </div>
+                    <label for="email">Email:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        autocomplete="email"
+                    /><br /><br />
+                    <!--stripe should fill in "card-element" div dynamically-->
+                    <div id="card-element"></div>
                     <button type="submit">Submit Order</button>
                 </form>
                 <div id="card-errors" role="alert"></div>
             </div>
         </div>
-        
-    <script src="scripts.js"></script>
-</body>
+
+        <script src="scripts.js"></script>
+    </body>
 </html>
